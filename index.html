@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DO IT!</title>
+    <!-- MATERIAL CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="slider.css">
+    
+    <!-- BOOTSTRAP ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <!-- BOOTSTRAP -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous"/>
+    <!-- FORM CSS -->
+    <link rel="stylesheet" href="/form.css">
+
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+  </head>
+  <body>
+    <div class="container-fluid bg-dark">
+      <div class="row p-2 justify-content-center justify-content-sm-between">
+        <div
+          class="col-7  my-0 my-sm-3 d-flex "
+        >
+          <img src="./sources/logo.svg" alt="" class="logo-width"/>
+        </div>
+        <div
+          class="col-3 col-sm-2 text-light d-flex justify-content-around"
+        >
+        <i class="bi bi-facebook social-icon fb "></i>
+        <i class="bi bi-twitter social-icon twitter"></i>
+        <i class="bi bi-whatsapp social-icon whatsapp"></i>
+        <!-- <h1 class="nav-socials">LOGOS</h1> -->
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <div class="background-container">
+            <img src="./sources/bg-edit.jpg" alt="" class="bg-overlay" />
+            <img src="./sources/hero-image-text.svg" alt="" class="hero-text" />
+            <img src="./sources/hero-badge.png" alt="" class="hero-badge" />
+          </div>
+        </div>
+      </div>
+      <div class="row gx-5">
+        <div
+          class="col-6 d-flex justify-content-center text-white background-green"
+        >
+          <a  class="link-text toggle">BUY COMBO</a>
+        </div>
+        <div
+          class="col-6 d-flex justify-content-center text-white background-green"
+        >
+          <a class="link-text toggle" >BUY 1 COURSE</a>
+        </div>
+      </div>
+      <!-- FORM -->
+      <div class="form-container">
+        <div class="form-slider closed  dp-none">
+          <form action="" method="POST" name="registration-form">
+          <div class="row justify-content-around">
+            <div class="col-12 registration-text my-3 d-flex justify-content-center">
+              REGISTRATION FORM
+            </div>
+            <div class="col-12 my-3" id="papers-text">
+              Papers <span id="papers-count">00</span>
+            </div>
+            <input type="text" class="dp-none" name="Paper_Count">
+            <div class="row justify-content-around">        
+            <div class="col-3 " >
+                <div class="course-select-boxes h-100 w-50 w-sm-100 ms-5" data-bs-toggle="modal" data-bs-target="#courseModal">
+                  <div class="circle-plus d-flex justify-content-center " id="plus01">
+                    +
+                  </div>
+                </div>
+                <div class="my-5">
+                <select name="Attempt" class="papers">
+                  <option value="" disabled selected >Attempt</option>
+                  <option value="Dec 2022 Plan I" id="attempt1" >Dec 2022 Plan I</option>
+                  <option value="Dec 2022 & June 2023 Plan Q">Dec 2022 & June 2023 Plan Q</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="course-select-boxes h-100 w-50 w-sm-100 ms-5" data-bs-toggle="modal" data-bs-target="#courseModal02">
+                <div class="circle-plus d-flex justify-content-center " id="plus02">
+                  +
+                </div>
+              </div>
+              <div class="my-5">
+                <select name="Attempt02" class="papers">
+                  <option value="" disabled selected>Attempt</option>
+                  <option value="Dec 2022 Plan I">Dec 2022 Plan I</option>
+                  <option value="Dec 2022 & June 2023 Plan Q">Dec 2022 & June 2023 Plan Q</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-3" >
+              <div class="course-select-boxes h-100 w-50 w-sm-100 ms-5" data-bs-toggle="modal" data-bs-target="#courseModal03">
+                <div class="circle-plus d-flex justify-content-center " id="plus03">
+                  +
+                </div>
+              </div>  
+              <div class="my-5">
+                <select name="Attempt03" class="papers">
+                  <option value="" disabled selected>Attempt</option>
+                  <option value="Dec 2022 Plan I">Dec 2022 Plan I</option>
+                  <option value="Dec 2022 & June 2023 Plan Q">Dec 2022 & June 2023 Plan Q</option>
+                </select>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="name-margin">
+            <div class="row justify-content-center">
+        
+            <div class="col-5 col-sm-5 input-field mx-3 my-5">
+              <input id="name" type="text" class="validate" name="Name" >
+              <label for="name">Name</label>
+            </div>
+            <div class="col-5 col-sm-5 input-field mx-3 my-5">
+              <input id="guardian-name" type="text" class="validate" name="Guardian_Name" >
+              <label for="guardian-name">Father's/Guardian's Name</label>
+            </div>
+            <div class="col-5 col-sm-5 input-field mx-3 my-5">
+              <input id="phone" type="number" class="validate" name="Phone" >
+              <label for="phone">Phone#</label>
+            </div>
+            <div class="col-5 col-sm-5 input-field mx-3 my-5">
+              <input id="guardian-phone" type="number" class="validate" name="Guardian_Phone"  >
+              <label for="guardian-phone">Father's/Guardian's Phone#</label>
+            </div>
+            <div class="col-5 col-sm-5 input-field mx-3 my-5">
+              <input id="cnic" type="tel" class="validate" name="CNIC" pattern="[0-9]{13}"  >
+              <label for="cnic">CNIC</label>
+            </div>
+            <div class="col-5 col-sm-5 input-field mx-3 my-5">
+              <input id="e-mail" type="email" class="validate" name="Email" >
+              <label for="e-mail">E-mail</label>
+            </div>
+            <div class="col-5 col-sm-5 input-field mx-3 my-5">
+              <div class="file-field input-field">
+                <div class="btn">
+                  <!-- <span class="btn-large waves-effect waves-light upload-button">Upload</span> -->
+                  <input type="file" id="ICAP" accept="image/*">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="ICAP Card" name="ICAP" >
+                </div>
+                <span id="image-size" style="color: red;"></span>
+              </div>
+            </div>
+            <div class="col-5 col-sm-5 input-field mx-3 my-5">
+              <select name="State/Province" id="province">
+                <option value="" disabled selected>Province</option>
+                <option value="sindh">Sindh</option>
+                <option value="balochistan">Balochistan</option>
+                <option value="punjab">Punjab</option>
+                <option value="kpk">KPK</option>
+              </select>
+            </div>
+            <div class="col-5 col-sm-5 input-field mx-3 my-sm-3">
+              <label>CITY
+                <input list="cities" name="City" class="validate"/></label>
+                <datalist id="cities">
+                </datalist>
+            </div>
+
+            <div class="col-5 col-sm-5 input-field mx-3 my-5">
+              <input list="Areas" name="Area" class="validate"/></label>
+                <datalist id="Areas">
+
+                </datalist>
+            </div>
+            <div class="col-5 col-sm-5 input-field mx-3 my-5">
+              <input id="coupon" type="text" class="validate" name="Coupon" >
+              <label for="coupon">Coupon</label>
+            </div>
+            <div class="col-12 col-sm-7 d-flex justify-content-center mb-4">
+              <div class="amount-box-1">PKR&nbsp;</div>
+              <div class="amount-box-2">&nbsp;&nbsp;123,131</div>
+            </div>
+          
+            <div class="col-6 col-sm-5 mx-5 d-flex justify-content-center">
+              <input type="text" name="ICAP_Card" class="dp-none">
+              <button class="btn-large waves-effect waves-light submit-button" type="submit" name="action">Submit
+                <!-- <i class="material-icons right">send</i> -->
+              </button>
+            </div>
+        </div>
+          </form>
+        </div>
+      </div>
+    </div>
+      <!-- FORM END -->
+      <div class="row">
+        <div class="col-6 col-md-4">
+          <img src="./sources/CFAP 1.jpg" alt="" class="w-100" />
+        </div>
+        <div class="col-6 col-md-4">
+          <img src="./sources/CFAP 2.jpg" alt="" class="w-100" />
+        </div>
+        <div class="col-6 col-md-4">
+          <img src="./sources/CFAP 3.jpg" alt="" class="w-100" />
+        </div>
+        <div class="col-6 col-md-4">
+          <img src="./sources/CFAP 4.jpg" alt="" class="w-100" />
+        </div>
+        <div class="col-6 col-md-4">
+          <img src="./sources/CFAP 5.jpg" alt="" class="w-100" />
+        </div>
+        <div class="col-6 col-md-4">
+          <img src="./sources/CFAP 6.jpg" alt="" class="w-100" />
+        </div>
+      </div>
+      <div class="row justify-content-center my-3">
+        <div class="col-8 text-center text-white background-green py-2 border-button">
+          GET YOURSELVES REGISTERED NOW
+        </div>
+      </div>
+      <div class="row gx-5">
+        <div
+          class="col-6 d-flex justify-content-center text-white background-green"
+        >
+          <a href="#" class="link-text">BUY COMBO</a>
+        </div>
+        <div
+          class="col-6 d-flex justify-content-center text-white background-green"
+        >
+          <a href="#" class="link-text">BUY 1 COURSE</a>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-12 d-flex justify-content-center">
+          <h1 class="gradient-text">TESTIMONIALS</h1>
+        </div>
+      </div>
+    </div>
+      <!-- SLIDER-START -->
+        <div class="container-fluid my-5">
+          <div class="row justify-content-center">
+            <div class="col-12 justify-content-center ms-5 ms-sm-0">
+            <input type="radio" name="slider" id="item-1" >
+            <input type="radio" name="slider" id="item-2" checked>
+            <input type="radio" name="slider" id="item-3">
+            <div class="cards" style="display:flex;justify-content: center;">
+              <label class="card" for="item-1" id="song-1" style="width: 200px;">
+                  <div class="testimonial-border position-relative" >
+                    <img
+                      src="./sources/Mannar-png.png"
+                      alt=""
+                      class="headshot position-absolute bottom-0 end-0"
+                    />
+                  </div>
+              </label>
+              <label class="card" for="item-2" id="song-2" style="width: 200px;">
+                <div class="testimonial-border position-relative">
+                  <img
+                    src="./sources/murtaza png.png"
+                    alt=""
+                    class="headshot position-absolute bottom-0 end-0"
+                  />
+                </div>
+              </label>
+              <label class="card" for="item-3" id="song-3" style="width: 200px;">
+                <div class="testimonial-border position-relative">
+                  <img
+                    src="./sources/Munaf png.png"
+                    alt=""
+                    class="headshot position-absolute bottom-0 end-0"
+                  />
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- SLIDER-END -->
+      
+      <!-- <div class="row justify-content-around">
+        
+        <div class="col-10 my-2 col-sm-3 testimonial-border position-relative">
+          
+          <img
+            src="./sources/Mannar-png.png"
+            alt=""
+            class="headshot position-absolute bottom-0 end-0"
+          />
+          
+        </div>
+        <div class="col-10 my-2 col-sm-3 testimonial-border position-relative">
+          <img
+            src="./sources/murtaza png.png"
+            alt=""
+            class="headshot position-absolute bottom-0 end-0"
+          />
+        </div>
+        <div class="col-10 my-2 col-sm-3 testimonial-border position-relative">
+          <img
+            src="./sources/Munaf png.png"
+            alt=""
+            class="headshot position-absolute bottom-0 end-0"
+          />
+        </div>
+      </div> -->
+      <div class="container-fluid my-5 feature-margin">
+      <div class="row bg-black justify-content-between">
+        <div
+          class="col-12 d-flex justify-content-center gradient-text"
+        >
+          FEATURES
+        </div>
+        <div class="col-6 my-4">
+          <img src="./sources//plan_q.jpg" alt="" class="w-100" />
+        </div>
+        <div class="col-6 my-4 text-white px-4">
+          <div class="col-12 plan-heading">Learning Environment</div>
+          <div class="col-12 plan-highlighted">"We believe in practice"</div>
+          <div class="col-12 plan-para">To ensure the courses we are providing are
+             of high quality we use modern day technologies to meet the
+             student's requirement. At IQSF we provide weekly planners,
+             practice tests,mocks,notes and lots of practicing material
+             because we believe in practice based learning.
+            </div>
+        </div>
+        <div class="col-6 my-4 text-white px-4">
+          <div class="col-12 plan-heading">PLAN I <a class="remove-a" href="" target="_blank"></a><button class="watch-video">Watch video</button></a> </div>
+          <div class="col-12 plan-highlighted">"Study with the faculty"</div>
+          <div class="col-12 plan-para">Plan I is a Hybrid modal where
+            students can attend classes at campus or Live
+            from home. In this plan student can stay tuned
+            with the teacher plus having all the benefits
+            of PLAN Q.
+          </div>
+        </div>
+        <div class="col-6 my-4 my-3 d-flex justify-content-end">
+          <img src="./sources/plan_i.jpg" alt="" class="w-100" />
+        </div>
+        <div class="col-6 my-4 my-3">
+          <img src="./sources/plan_q.jpg" alt="" class="w-100" />
+        </div>
+        <div class="col-6 my-4 text-white px-4">
+          <div class="col-12 plan-heading ">PLAN Q<a class="remove-a" href="https://www.facebook.com/iqsf.pk/videos/plan-q/1399697953805807" target="_blank"><button class="watch-video"> Watch video</button></a></div>
+          <div class="col-12 plan-highlighted">"Prepare in advance with 100% course"</div>
+          <div class="col-12 plan-para">Plan Q is "High Quality Lectures".In this plan students will get access to 100% course at first day in a very organised manner plus faculty will conduct regular QnA session once in every week to ensure performance of students and to make sure you students are prepared for the final exams practice tests and Mock tests will be conducted before the course ends.
+            </div>
+        </div>
+      </div>
+        <!-- FAQS -->
+      <div class="row bg-black my-2">
+        <div class="col-12 bg-light">
+          <div class="accordion" id="accordionExample">
+            <!-- MAIN -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button bg-dark text-white p-2 rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                  <p class="heading-text">FAQ's</p>
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                   <!-- FIRST -->
+                   <div class="accordion-item border-none my-1">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button
+                        class="accordion-button collapsed bg-dark text-white p-2 rounded-0"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne"
+                        aria-expanded="false"
+                        aria-controls="collapseOne"
+                      >
+                        Will there be 100% course coverage?
+                      </button>
+                    </h2>
+                    <div
+                      id="collapseOne"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="headingTwo"
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div class="accordion-body">
+                        <strong>YES</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- SECOND -->
+                  <div class="accordion-item border-none my-1">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button
+                        class="accordion-button collapsed bg-dark text-white p-2 rounded-0"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="collapseTwo"
+                      >
+                        Will we get Notes/Handouts and MCQ's?
+                      </button>
+                    </h2>
+                    <div
+                      id="collapseTwo"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="headingTwo"
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div class="accordion-body">
+                        <strong
+                          >YES BOOKS ARE AVAILABLE FOR PRACTICE</strong
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <!-- THIRD -->
+                  <div class="accordion-item border-none my-1">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button
+                        class="accordion-button collapsed bg-dark text-white p-2 rounded-0"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree"
+                        aria-expanded="false"
+                        aria-controls="collapseThree"
+                      >
+                        Can I buy course(s) for Dec 22 attempt only?
+                      </button>
+                    </h2>
+                    <div
+                      id="collapseThree"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="headingTwo"
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div class="accordion-body">
+                        <strong
+                          >YES YOU CAN BUY FOR DEC AND ONWARDS</strong
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <!-- FOURTH -->
+                  <div class="accordion-item border-none my-1">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button
+                        class="accordion-button collapsed bg-dark text-white p-2 rounded-0"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseFourth"
+                        aria-expanded="false"
+                        aria-controls="collapseFourth"
+                      >
+                        What is the difference between Plan I & Plan Q
+                      </button>
+                    </h2>
+                    <div
+                      id="collapseFourth"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="headingTwo"
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div class="accordion-body">
+                        <strong
+                          >PLAN I CURRENT BATCH AND PLAN Q RECORDED LECTURES</strong
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <!-- FIFTH -->
+                  <div class="accordion-item border-none my-1">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button
+                        class="accordion-button collapsed bg-dark text-white p-2 rounded-0"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseFifth"
+                        aria-expanded="false"
+                        aria-controls="collapseFifth"
+                      >
+                        Is there any instalment plan?
+                      </button>
+                    </h2>
+                    <div
+                      id="collapseFifth"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="headingTwo"
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div class="accordion-body">
+                        <strong
+                          >YES STUDENT CAN PAY IN INSTALLMENTS</strong
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <!-- SIXTH -->
+                  <div class="accordion-item border-none my-1">
+                    <h2 class="accordion-header" id="headingThree">
+                      <button
+                        class="accordion-button collapsed bg-dark text-white p-2"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseSixth"
+                        aria-expanded="false"
+                        aria-controls="collapseSixth"
+                      >
+                        I want to know more about CFAP Faculty?
+                      </button>
+                    </h2>
+                    <div
+                      id="collapseSixth"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="headingThree"
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div class="accordion-body">
+                        <strong
+                          >FAFR AND TAX SIR MURTAZA QUAID <br>
+                          SIR MANAR AHMED FOR LAW <br>
+                          SIR MUZZAMMIL MUNAF FOR SPM,BFD AND MSA 2 <br>
+                          SIR IBRAHIM AUDIT AND MSA 1</strong
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- END -->
+            
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-around">
+        <div class="col-12 d-flex justify-content-center gradient-text">
+          OUR LOCATION
+        </div>
+        <div class="col-10 col-sm-4 location-border-1">
+          <div class="col-12 d-flex justify-content-center"> <img src="./sources/billboard.jpg" alt="" class="w-75 h-50 my-3"></div>
+          <div class="col-12 d-flex justify-content-center my-2  my-sm-5"> <i class="bi bi-pin-map-fill location-icon"><span class="location-text"> 187K, P.E.C.H.S Block 2 Karachi</span></i></div>
+          <div class="col-12 d-flex justify-content-center"><i class="bi bi-telephone-fill location-icon"><span class="location-text"> +92 232 0230232</span></i></div>
+         
+        </div>
+        <div class="col-10 col-sm-7 location-border-2 mx-5 mx-sm-2">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14480.186442801858!2d67.0588564!3d24.8622576!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3f399dd983a02594!2sIQ%20School%20Of%20Finance%20(CA%20Institute)!5e0!3m2!1sen!2s!4v1654281713404!5m2!1sen!2s" class="embed-map" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+      <div class="row bg-black text-white my-2 p-2">
+        <div class="col-6 col-sm-3 d-flex justify-content-center pointer">
+          Faculty
+        </div>
+        <div class="col-6 col-sm-3 d-flex justify-content-center pointer"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Pricing Chart
+        </div>
+        <div class="col-6 col-sm-3 d-flex justify-content-center pointer">
+          Courses
+        </div>
+        <div class="col-6 col-sm-3 d-flex justify-content-center pointer">
+          Registration Form
+        </div>
+      </div>
+    </div>
+
+   
+
+
+    <!-- Pricing Modal -->
+    <div class="d-flex justify-content-center">
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Pricing Chart</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img src="./sources/fee_structure_1.jpg" alt="" class="pricing-chart">
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- PRICING END -->
+
+    <!-- COURSES MODAL 01 -->
+      <div class="modal modal-sm-w-100 modal-sm-w-25 fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="courseModalLabel">Courses</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 1.jpg" alt="" class="course-chart" value="CFAP 1: AAFR">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 2.jpg" alt="" class="course-chart" value="CFAP 2: ACLP">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 3.jpg" alt="" class="course-chart" value="CFAP 3: SPM">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 4.jpg" alt="" class="course-chart" value="CFAP 4: BFD">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 5.jpg" alt="" class="course-chart" value="CFAP 5: TPP">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 6.jpg" alt="" class="course-chart" value="CFAP 6: AARS">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COURSES END -->
+
+      <!-- COURSES MODAL 02 -->
+      <div class="modal modal-sm-w-100 modal-sm-w-25 fade " id="courseModal02" tabindex="-1" aria-labelledby="courseModal02Label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="courseModal02Label">Courses</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 1.jpg" alt="" class="course-chart-02" value="CFAP 1: AAFR">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 2.jpg" alt="" class="course-chart-02" value="CFAP 2: ACLP">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 3.jpg" alt="" class="course-chart-02" value="CFAP 3: SPM">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 4.jpg" alt="" class="course-chart-02" value="CFAP 4: BFD">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 5.jpg" alt="" class="course-chart-02" value="CFAP 5: TPP">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 6.jpg" alt="" class="course-chart-02" value="CFAP 6: AARS">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COURSES END -->
+
+      <!-- COURSES MODAL 03 -->
+      <div class="modal modal-sm-w-100 modal-sm-w-25 fade " id="courseModal03" tabindex="-1" aria-labelledby="courseModal03Label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="courseModal03Label">Courses</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 1.jpg" alt="" class="course-chart-03" value="CFAP 1: AAFR">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 2.jpg" alt="" class="course-chart-03" value="CFAP 2: ACLP">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 3.jpg" alt="" class="course-chart-03" value="CFAP 3: SPM">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 4.jpg" alt="" class="course-chart-03" value="CFAP 4: BFD">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 5.jpg" alt="" class="course-chart-03" value="CFAP 5: TPP">
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center">
+                  <img src="./sources/CFAP 6.jpg" alt="" class="course-chart-03" value="CFAP 6: AARS">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COURSES END -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+      <!-- MATERIAL JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- MY JS -->
+    <script src="app.js" type="module"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('select');
+      M.FormSelect.init(elems);
+  });
+    </script>
+  </body>
+</html>
