@@ -81,13 +81,14 @@
             <input type="text" class="dp-none" name="Paper_Count">
             <div class="row justify-content-around">        
             <div class="col-3 " >
-                <div class="course-select-boxes h-100 w-50 w-sm-100 ms-5" data-bs-toggle="modal" data-bs-target="#courseModal">
-                  <div class="circle-plus d-flex justify-content-center " id="plus01">
-                    +
-                  </div>
+              <button type="button" class="btn btn-outline-danger ms-5" id="close01" disabled onclick="removeCourse01(this)">Remove</button>
+              <div class="course-select-boxes h-100 w-50 w-sm-100 ms-5" data-bs-toggle="modal" data-bs-target="#courseModal">
+                <div class="circle-plus d-flex justify-content-center " id="plus01">
+                  +
                 </div>
-                <div class="my-5">
-                <select name="Attempt" class="papers">
+              </div>
+              <div class="my-5 hidden" id="Attempt">
+                <select name="Attempt" class="papers hidden"   >
                   <option value="" disabled selected >Attempt</option>
                   <option value="Dec 2022 Plan I" id="attempt1" >Dec 2022 Plan I</option>
                   <option value="Dec 2022 & June 2023 Plan Q">Dec 2022 & June 2023 Plan Q</option>
@@ -95,13 +96,14 @@
               </div>
             </div>
             <div class="col-3">
+              <button type="button" class="btn btn-outline-danger ms-5" id="close02" onclick="removeCourse02(this)" disabled>Remove</button>
               <div class="course-select-boxes h-100 w-50 w-sm-100 ms-5" data-bs-toggle="modal" data-bs-target="#courseModal02">
                 <div class="circle-plus d-flex justify-content-center " id="plus02">
                   +
                 </div>
               </div>
-              <div class="my-5">
-                <select name="Attempt02" class="papers">
+              <div class="my-5 hidden" id="Attempt02">
+                <select name="Attempt02" class="papers"  >
                   <option value="" disabled selected>Attempt</option>
                   <option value="Dec 2022 Plan I">Dec 2022 Plan I</option>
                   <option value="Dec 2022 & June 2023 Plan Q">Dec 2022 & June 2023 Plan Q</option>
@@ -109,13 +111,14 @@
               </div>
             </div>
             <div class="col-3" >
+              <button type="button" class="btn btn-outline-danger ms-5" id="close03" onclick="removeCourse03(this)" disabled>Remove</button>
               <div class="course-select-boxes h-100 w-50 w-sm-100 ms-5" data-bs-toggle="modal" data-bs-target="#courseModal03">
                 <div class="circle-plus d-flex justify-content-center " id="plus03">
                   +
                 </div>
               </div>  
-              <div class="my-5">
-                <select name="Attempt03" class="papers">
+              <div class="my-5 hidden" id="Attempt03">
+                <select name="Attempt03" class="papers hidden"  >
                   <option value="" disabled selected>Attempt</option>
                   <option value="Dec 2022 Plan I">Dec 2022 Plan I</option>
                   <option value="Dec 2022 & June 2023 Plan Q">Dec 2022 & June 2023 Plan Q</option>
@@ -128,34 +131,34 @@
             <div class="row justify-content-center">
         
             <div class="col-5 col-sm-5 input-field mx-3 my-5">
-              <input id="name" type="text" class="validate" name="Name" >
+              <input id="name" type="text" class="validate" name="Name" required>
               <label for="name">Name</label>
             </div>
             <div class="col-5 col-sm-5 input-field mx-3 my-5">
-              <input id="guardian-name" type="text" class="validate" name="Guardian_Name" >
+              <input id="guardian-name" type="text" class="validate" name="Guardian_Name" required>
               <label for="guardian-name">Father's/Guardian's Name</label>
             </div>
             <div class="col-5 col-sm-5 input-field mx-3 my-5">
-              <input id="phone" type="number" class="validate" name="Phone" >
+              <input id="phone" type="number" class="validate" name="Phone" required>
               <label for="phone">Phone#</label>
             </div>
             <div class="col-5 col-sm-5 input-field mx-3 my-5">
-              <input id="guardian-phone" type="number" class="validate" name="Guardian_Phone"  >
+              <input id="guardian-phone" type="number" class="validate" name="Guardian_Phone" required>
               <label for="guardian-phone">Father's/Guardian's Phone#</label>
             </div>
             <div class="col-5 col-sm-5 input-field mx-3 my-5">
-              <input id="cnic" type="tel" class="validate" name="CNIC" pattern="[0-9]{13}"  >
+              <input id="cnic" type="tel" class="validate" name="CNIC" pattern="[0-9]{5}-[0-9]{8}-[0-9]{1}" required>
               <label for="cnic">CNIC</label>
             </div>
             <div class="col-5 col-sm-5 input-field mx-3 my-5">
-              <input id="e-mail" type="email" class="validate" name="Email" >
+              <input id="e-mail" type="email" class="validate" name="Email" required>
               <label for="e-mail">E-mail</label>
             </div>
             <div class="col-5 col-sm-5 input-field mx-3 my-5">
               <div class="file-field input-field">
                 <div class="btn">
                   <!-- <span class="btn-large waves-effect waves-light upload-button">Upload</span> -->
-                  <input type="file" id="ICAP" accept="image/*">
+                  <input type="file" id="ICAP" accept="image/*" required>
                 </div>
                 <div class="file-path-wrapper">
                   <input class="file-path validate" type="text" placeholder="ICAP Card" name="ICAP" >
@@ -164,7 +167,7 @@
               </div>
             </div>
             <div class="col-5 col-sm-5 input-field mx-3 my-5">
-              <select name="State/Province" id="province">
+              <select name="State/Province" id="province" required>
                 <option value="" disabled selected>Province</option>
                 <option value="sindh">Sindh</option>
                 <option value="balochistan">Balochistan</option>
@@ -174,29 +177,55 @@
             </div>
             <div class="col-5 col-sm-5 input-field mx-3 my-sm-3">
               <label>CITY
-                <input list="cities" name="City" class="validate"/></label>
+                <input list="cities" name="City" class="validate" id="city-input" required/></label>
                 <datalist id="cities">
                 </datalist>
             </div>
 
-            <div class="col-5 col-sm-5 input-field mx-3 my-5">
-              <input list="Areas" name="Area" class="validate"/></label>
+            <div class="col-5 col-sm-5 input-field mx-3 my-3 " id="area-input">
+              <label>Area/Locality
+              <input list="Areas" name="Area/Locality" class="validate" disabled/></label>
                 <datalist id="Areas">
-
+                  <option value="Gulshan e Iqbal">
+                  <option value="Gulistan e Jauhar">
+                  <option value="FB Area">
+                  <option value="North Nazimabad">
+                  <option value="Shahrah-e-Faisal">
+                  <option value="Liaquatabad">
+                  <option value="Gulshan e Shamim">
+                  <option value="Gulzar e Hijri">
+                  <option value="PECHS">
+                  <option value="SMCHS">
+                </datalist>
+            </div>
+          </div>
+            <div class="row justify-content-around my-5">
+            <div class="col-5 col-sm-5 input-field mx-3 my-3">
+              <label>Qualification
+              <input list="institutes" name="Qualification" class="validate" required/></label>
+                <datalist id="institutes">
+                  <option value="Intermediate (I.COM)">
+                  <option value="Intermediate (Pre Engr)">
+                  <option value="Intermediate (Pre Med)">
+                  <option value="O/A Levels">
+                  <option value="Agha Khan Board">
                 </datalist>
             </div>
             <div class="col-5 col-sm-5 input-field mx-3 my-5">
               <input id="coupon" type="text" class="validate" name="Coupon" >
               <label for="coupon">Coupon</label>
+              <span>Type "city20" eg."karachi20"</span><br>
+              <span id="coupon-span" style="color: green;"></span>
             </div>
             <div class="col-12 col-sm-7 d-flex justify-content-center mb-4">
               <div class="amount-box-1">PKR&nbsp;</div>
-              <div class="amount-box-2">&nbsp;&nbsp;123,131</div>
+              <div class="amount-box-2">&nbsp;&nbsp;00</div>
             </div>
-          
-            <div class="col-6 col-sm-5 mx-5 d-flex justify-content-center">
+            <div class="loader dp-none"></div>
+            <div class="col-12 col-sm-12 mx-5 d-flex justify-content-center">
               <input type="text" name="ICAP_Card" class="dp-none">
-              <button class="btn-large waves-effect waves-light submit-button" type="submit" name="action">Submit
+              <input type="text" name="Paper(s)" class="dp-none">
+              <button class="btn-large waves-effect waves-light submit-button mb-5" type="submit" name="action" id="submit-btn">Submit
                 <!-- <i class="material-icons right">send</i> -->
               </button>
             </div>
@@ -206,7 +235,8 @@
       </div>
     </div>
       <!-- FORM END -->
-      <div class="row">
+      <div class="" id="courses-row" >
+      <div class="row" >
         <div class="col-6 col-md-4">
           <img src="./sources/CFAP 1.jpg" alt="" class="w-100" />
         </div>
@@ -226,11 +256,13 @@
           <img src="./sources/CFAP 6.jpg" alt="" class="w-100" />
         </div>
       </div>
+    
       <div class="row justify-content-center my-3">
         <div class="col-8 text-center text-white background-green py-2 border-button">
           GET YOURSELVES REGISTERED NOW
-        </div>
+        </div>  
       </div>
+    </div>
       <div class="row gx-5">
         <div
           class="col-6 d-flex justify-content-center text-white background-green"
@@ -609,23 +641,23 @@
             </div>
             <div class="modal-body">
               <div class="row">
-                <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 1.jpg" alt="" class="course-chart" value="CFAP 1: AAFR">
+                <div class="col-12 col-sm-6 d-flex justify-content-center" >
+                  <img src="./sources/CFAP 1.jpg" alt="" class="course-chart"  value="CFAP 1: AAFR" onclick="counter01(this)">
                 </div>
-                <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 2.jpg" alt="" class="course-chart" value="CFAP 2: ACLP">
+                <div class="col-12 col-sm-6 d-flex justify-content-center" >
+                  <img src="./sources/CFAP 2.jpg" alt="" class="course-chart"  value="CFAP 2: ACLP" onclick="counter01(this)">
                 </div>
-                <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 3.jpg" alt="" class="course-chart" value="CFAP 3: SPM">
+                <div class="col-12 col-sm-6 d-flex justify-content-center" >
+                  <img src="./sources/CFAP 3.jpg" alt="" class="course-chart"  value="CFAP 3: SPM" onclick="counter01(this)">
                 </div>
-                <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 4.jpg" alt="" class="course-chart" value="CFAP 4: BFD">
+                <div class="col-12 col-sm-6 d-flex justify-content-center" >
+                  <img src="./sources/CFAP 4.jpg" alt="" class="course-chart"  value="CFAP 4: BFD" onclick="counter01(this)">
                 </div>
-                <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 5.jpg" alt="" class="course-chart" value="CFAP 5: TPP">
+                <div class="col-12 col-sm-6 d-flex justify-content-center" >
+                  <img src="./sources/CFAP 5.jpg" alt="" class="course-chart"  value="CFAP 5: TPP" onclick="counter01(this)">
                 </div>
-                <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 6.jpg" alt="" class="course-chart" value="CFAP 6: AARS">
+                <div class="col-12 col-sm-6 d-flex justify-content-center" >
+                  <img src="./sources/CFAP 6.jpg" alt="" class="course-chart"  value="CFAP 6: AARS" onclick="counter01(this)">
                 </div>
               </div>
             </div>
@@ -646,22 +678,22 @@
             <div class="modal-body">
               <div class="row">
                 <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 1.jpg" alt="" class="course-chart-02" value="CFAP 1: AAFR">
+                  <img src="./sources/CFAP 1.jpg" alt="" class="course-chart-02" onclick="counter02(this)" value="CFAP 1: AAFR">
                 </div>
                 <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 2.jpg" alt="" class="course-chart-02" value="CFAP 2: ACLP">
+                  <img src="./sources/CFAP 2.jpg" alt="" class="course-chart-02" onclick="counter02(this)" value="CFAP 2: ACLP">
                 </div>
                 <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 3.jpg" alt="" class="course-chart-02" value="CFAP 3: SPM">
+                  <img src="./sources/CFAP 3.jpg" alt="" class="course-chart-02" onclick="counter02(this)" value="CFAP 3: SPM">
                 </div>
                 <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 4.jpg" alt="" class="course-chart-02" value="CFAP 4: BFD">
+                  <img src="./sources/CFAP 4.jpg" alt="" class="course-chart-02" onclick="counter02(this)" value="CFAP 4: BFD">
                 </div>
                 <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 5.jpg" alt="" class="course-chart-02" value="CFAP 5: TPP">
+                  <img src="./sources/CFAP 5.jpg" alt="" class="course-chart-02" onclick="counter02(this)" value="CFAP 5: TPP">
                 </div>
                 <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 6.jpg" alt="" class="course-chart-02" value="CFAP 6: AARS">
+                  <img src="./sources/CFAP 6.jpg" alt="" class="course-chart-02" onclick="counter02(this)" value="CFAP 6: AARS">
                 </div>
               </div>
             </div>
@@ -672,7 +704,7 @@
       <!-- COURSES END -->
 
       <!-- COURSES MODAL 03 -->
-      <div class="modal modal-sm-w-100 modal-sm-w-25 fade " id="courseModal03" tabindex="-1" aria-labelledby="courseModal03Label" aria-hidden="true">
+      <div class="modal modal-sm-w-100 modal-sm-w-25 fade"  id="courseModal03" tabindex="-1" aria-labelledby="courseModal03Label" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -682,22 +714,22 @@
             <div class="modal-body">
               <div class="row">
                 <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 1.jpg" alt="" class="course-chart-03" value="CFAP 1: AAFR">
+                  <img src="./sources/CFAP 1.jpg" alt="" class="course-chart-03" onclick="counter03(this)" value="CFAP 1: AAFR">
                 </div>
                 <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 2.jpg" alt="" class="course-chart-03" value="CFAP 2: ACLP">
+                  <img src="./sources/CFAP 2.jpg" alt="" class="course-chart-03" onclick="counter03(this)" value="CFAP 2: ACLP">
                 </div>
                 <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 3.jpg" alt="" class="course-chart-03" value="CFAP 3: SPM">
+                  <img src="./sources/CFAP 3.jpg" alt="" class="course-chart-03" onclick="counter03(this)" value="CFAP 3: SPM">
                 </div>
                 <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 4.jpg" alt="" class="course-chart-03" value="CFAP 4: BFD">
+                  <img src="./sources/CFAP 4.jpg" alt="" class="course-chart-03" onclick="counter03(this)" value="CFAP 4: BFD">
                 </div>
                 <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 5.jpg" alt="" class="course-chart-03" value="CFAP 5: TPP">
+                  <img src="./sources/CFAP 5.jpg" alt="" class="course-chart-03" onclick="counter03(this)" value="CFAP 5: TPP">
                 </div>
                 <div class="col-12 col-sm-6 d-flex justify-content-center">
-                  <img src="./sources/CFAP 6.jpg" alt="" class="course-chart-03" value="CFAP 6: AARS">
+                  <img src="./sources/CFAP 6.jpg" alt="" class="course-chart-03" onclick="counter03(this)" value="CFAP 6: AARS">
                 </div>
               </div>
             </div>
@@ -715,12 +747,17 @@
       <!-- MATERIAL JS -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- MY JS -->
-    <script src="app.js" type="module"></script>
+    <script src="app.js"></script>
+    <script src="firebase.js" type="module"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
       var elems = document.querySelectorAll('select');
       M.FormSelect.init(elems);
+      
   });
+    </script>
+    <script>
+      
     </script>
   </body>
 </html>
