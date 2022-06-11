@@ -5,7 +5,7 @@
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 
-
+let price = 0;
 function upload() {
   var storageRef = firebase.storage().ref();
   var file = document.getElementById("ICAP").files[0];
@@ -51,23 +51,23 @@ let province = document.querySelector("#province");
 
 let imageSize = document.getElementById("image-size");
 
-province.addEventListener("change", () => {
-  let cities = document.querySelector("#cities");
-  let render = "";
-  cities.innerHTML = "";
-  if (province.value === "sindh") {
-    render = sindhCities;
-  } else if (province.value === "balochistan") {
-    render = balochistanCities;
-  } else if (province.value === "kpk") {
-    render = kpkCities;
-  } else {
-    render = punjabCities;
-  }
-  for (let i = 0; i < render.length; i++) {
-    cities.innerHTML += `<option value=${render[i]}>`;
-  }
-});
+// province.addEventListener("change", () => {
+//   let cities = document.querySelector("#cities");
+//   let render = "";
+//   cities.innerHTML = "";
+//   if (province.value === "sindh") {
+//     render = sindhCities;
+//   } else if (province.value === "balochistan") {
+//     render = balochistanCities;
+//   } else if (province.value === "kpk") {
+//     render = kpkCities;
+//   } else {
+//     render = punjabCities;
+//   }
+//   for (let i = 0; i < render.length; i++) {
+//     cities.innerHTML += `<option value=${render[i]}>`;
+//   }
+// });
 
 inp.addEventListener("change", () => {
   imageSize.innerText = "";
@@ -87,9 +87,9 @@ let count = 0;
 
 // PAPERS COUNT //
 
-let attempt = document.getElementById("Attempt");
-let attempt2 = document.getElementById("Attempt02");
-let attempt3 = document.getElementById("Attempt03");
+let attempt1 = document.getElementsByName("Attempt")[0];
+let attempt2 =  document.getElementsByName("Attempt02")[0];
+let attempt3 =  document.getElementsByName("Attempt03")[0];
 let attemptSelect = document.getElementsByName("Attempt")[0];
 let attempt2Select = document.getElementsByName("Attempt02")[0];
 let attempt3Select = document.getElementsByName("Attempt03")[0];
@@ -103,44 +103,65 @@ let removeFlag1 = false;
 let removeFlag2 = false;
 let removeFlag3 = false;
 
-var courseModal01 = new bootstrap.Modal(document.getElementById('courseModal'), {
-  keyboard: true
-})
-var courseModal02 = new bootstrap.Modal(document.getElementById('courseModal02'), {
-  keyboard: true
-})
-var courseModal03 = new bootstrap.Modal(document.getElementById('courseModal03'), {
-  keyboard: true
-})
+
 let countSpan = document.querySelector("#papers-count");
 
+var formModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+  keyboard: false
+})
+var courseModal01 = new bootstrap.Modal(document.getElementById('courseModal01'), {
+  keyboard: false
+})
 
+var modalTry = document.getElementById("courseModal01");
+let courseImages = document.getElementsByClassName("course-image");
 
-
-let plus01 = document.querySelector("#plus01");
-let plus02 = document.querySelector("#plus02");
-let plus03 = document.querySelector("#plus03");
-let close01 = document.getElementById("close01");
-let close02 = document.getElementById("close02");
-let close03 = document.getElementById("close03");
-let [box01,box02,box03] = document.getElementsByClassName("course-select-boxes");
-function counter01(e) {
- 
-  if(flag1){
-  ++count;
-  countSpan.innerHTML = "0" + count;
-  flag1 = false;
-  removeFlag1 = true;
+let plusBox01 = document.getElementById("plus-box-01");
+let plusBox02 = document.getElementById("plus-box-02");
+let plusBox03 = document.getElementById("plus-box-03");
+let modalTryFlag = true;
+modalTry.addEventListener("show.bs.modal",function(e){
+  var button = e.relatedTarget;
+  var recipient = button.getAttribute('data-bs-whatever');
+  if(recipient === "counter01"){
+    for(let i=0; i<courseImages.length; i++) {
+        courseImages[i].setAttribute("onclick","counter01(this)");
+      }
+    }else if(recipient === "counter02"){
+    for(let i=0; i<courseImages.length; i++) {
+        courseImages[i].setAttribute("onclick","counter02(this)");
+      }
+      
+    } else if(recipient === "counter03"){
+      for(let i=0; i<courseImages.length; i++) {
+        courseImages[i].setAttribute("onclick","counter03(this)");
+      }
   }
-    attempt.classList.remove("hidden");
-    attemptSelect.setAttribute("required","required");
-    paper01 = e.getAttribute("value");
-    close01.removeAttribute("disabled");
-    plus01.classList.remove("dp-none");
-    
-    addPlusBox01(e);
-    priceCalc();
-    courseModal01.toggle();
+  
+
+});
+
+let [box01,box02,box03] = document.getElementsByClassName("course-select-boxes");
+let remove1 = document.getElementById("remove-01");
+let remove2 = document.getElementById("remove-02");
+let remove3 = document.getElementById("remove-03");
+function counter01(e) {
+  console.log("one");
+  if(flag1){
+    ++count;
+    countSpan.innerHTML = "0" + count;
+    flag1 = false;
+    removeFlag1 = true;
+  }
+  attempt1.classList.remove("bg-none");
+  attempt1.setAttribute("required","required");
+  paper01 = e.getAttribute("value");
+  plusBox01.src = e.src;
+  remove1.classList.remove("bg-none")
+  priceCalc();
+  courseModal01.toggle();
+  formModal.toggle();
+  
 }
 function counter02(e) {
  
@@ -150,14 +171,15 @@ function counter02(e) {
   flag2 = false;
   removeFlag2 = true;
   }
-    attempt2.classList.remove("hidden");
-    attempt2Select.setAttribute("required","required");
+    attempt2.classList.remove("bg-none");
+    attempt2.setAttribute("required","required");
     paper02 = e.getAttribute("value");
-    close02.removeAttribute("disabled");
-    plus02.classList.remove("dp-none");
-    addPlusBox02(e);
+    plusBox02.src = e.src;
+    remove2.classList.remove("bg-none")
     priceCalc();
-    courseModal02.toggle();
+    courseModal01.toggle();
+    formModal.toggle();
+    
 }
 function counter03(e) {
  
@@ -167,19 +189,17 @@ function counter03(e) {
   flag3 = false;
   removeFlag3 = true;
   }
-    attempt3.classList.remove("hidden");
-    attempt3Select.setAttribute("required","required");
+    attempt3.classList.remove("bg-none");
+    attempt3.setAttribute("required","required");
     paper03 = e.getAttribute("value");
-    close03.removeAttribute("disabled");
-    plus03.classList.remove("dp-none");
-    addPlusBox03(e);
+    plusBox03.src = e.src;
+    remove3.classList.remove("bg-none")
     priceCalc();
-    courseModal03.toggle();
+    courseModal01.toggle();
+    formModal.toggle();
+    
 }
 
-// let close01 = document.getElementById("close01");
-// let close02 = document.getElementById("close02");
-// let close03 = document.getElementById("close03");
 
 function removeCourse01 (e) {
         if(removeFlag1){
@@ -188,76 +208,117 @@ function removeCourse01 (e) {
           flag1 = true;
           removeFlag1 = false;
         }
-        attempt.classList.add("hidden");
+        plusBox01.src = "./sources/select-card.png";
         attemptSelect.removeAttribute("required");
-        close01.setAttribute("disabled","disabled");
+        attemptSelect.classList.add("bg-none");
+        e.classList.add("bg-none");
         paper01 = "";
-        plus01.classList.add("dp-none");
-        box01.innerHTML = `<div class="circle-plus d-flex justify-content-center " id="plus01">
-        +
-      </div>`
         priceCalc();
-        delPlusBox01(e);
 
 }
 function removeCourse02 (e) {
-        if(removeFlag2){
-          --count;
-          countSpan.innerHTML = "0" + count;
-          flag2 = true;
-          removeFlag2 = false;
-        }
-        attempt2.classList.add("hidden");
-        attempt2Select.removeAttribute("required");
-        close02.setAttribute("disabled","disabled");
-        paper02 = "";
-        plus02.classList.add("dp-none");
-        box02.innerHTML = `<div class="circle-plus d-flex justify-content-center " id="plus02">
-        +
-      </div>`
-        priceCalc();
-        delPlusBox02(e);
+      if(removeFlag2){
+        --count;
+        countSpan.innerHTML = "0" + count;
+        flag2 = true;
+        removeFlag2 = false;
+      }
+      plusBox02.src = "./sources/select-card.png";
+      attempt2Select.removeAttribute("required");
+      attempt2Select.classList.add("bg-none");
+      e.classList.add("bg-none");
+      paper02 = "";
+      priceCalc();
 }
 function removeCourse03 (e) {
-        if(removeFlag3){
-          --count;
-          countSpan.innerHTML = "0" + count;
-          flag3 = true;
-          removeFlag3 = false;
-        }
-        attempt3.classList.add("hidden");
-        attempt3Select.removeAttribute("required");
-        close03.setAttribute("disabled","disabled");
-        paper03 = "";
-        plus03.classList.add("dp-none");
-        box03.innerHTML = `<div class="circle-plus d-flex justify-content-center " id="plus03">
-        +
-      </div>`
-        priceCalc();
-        delPlusBox01(e);
+  if(removeFlag3){
+    --count;
+    countSpan.innerHTML = "0" + count;
+    flag3 = true;
+    removeFlag3 = false;
+  }
+  plusBox03.src = "./sources/select-card.png";
+  attempt3Select.removeAttribute("required");
+  attempt3Select.classList.add("bg-none");
+  e.classList.add("bg-none");
+  paper03 = "";
+  priceCalc();
 }
 
-let amountBox = document.querySelectorAll(".amount-box-2")[0];
+let amountBox = document.querySelectorAll(".rupee")[0];
+
+function priceChartFunc() {
+  console.log("01" + !(!paper01) +"02" +!(!paper02)+"03"+!(!paper03));
+  if(paper01 && paper02){
+    if((paper01.substring(0,6) == "CFAP 1" || paper01.substring(0,6) == "CFAP 6") && (paper02.substring(0,6) == "CFAP 1" || paper02.substring(0,6) == "CFAP 6")){
+      price = 38000;
+    } else if((paper01.substring(0,6) == "CFAP 1" || paper01.substring(0,6) == "CFAP 3") && (paper02.substring(0,6) == "CFAP 1" || paper02.substring(0,6) == "CFAP 3")){
+      price = 24000;
+    } else if((paper01.substring(0,6) == "CFAP 1" || paper01.substring(0,6) == "CFAP 4") && (paper02.substring(0,6) == "CFAP 1" || paper02.substring(0,6) == "CFAP 4")){
+      price = 24000;
+    } else if((paper01.substring(0,6) == "CFAP 6" || paper01.substring(0,6) == "CFAP 3") && (paper02.substring(0,6) == "CFAP 6" || paper02.substring(0,6) == "CFAP 3")){
+      price = 30000; 
+    } else if((paper01.substring(0,6) == "CFAP 6" || paper01.substring(0,6) == "CFAP 4") && (paper02.substring(0,6) == "CFAP 6" || paper02.substring(0,6) == "CFAP 4")){
+      price = 30000;
+    } else if((paper01.substring(0,6) == "CFAP 3" || paper01.substring(0,6) == "CFAP 4") && (paper02.substring(0,6) == "CFAP 3" || paper02.substring(0,6) == "CFAP 4")){
+      price = 21000;
+    }
+  } else if(paper01 && paper03){
+    console.log("hellooo");
+
+    if((paper01.substring(0,6) == "CFAP 1" || paper01.substring(0,6) == "CFAP 6") && (paper03.substring(0,6) == "CFAP 1" || paper03.substring(0,6) == "CFAP 6")){
+      price = 38000;
+    } else if((paper01.substring(0,6) == "CFAP 1" || paper01.substring(0,6) == "CFAP 3") && (paper03.substring(0,6) == "CFAP 1" || paper03.substring(0,6) == "CFAP 3")){
+      price = 24000;
+    } else if((paper01.substring(0,6) == "CFAP 1" || paper01.substring(0,6) == "CFAP 4") && (paper03.substring(0,6) == "CFAP 1" || paper03.substring(0,6) == "CFAP 4")){
+      price = 24000;
+    } else if((paper01.substring(0,6) == "CFAP 6" || paper01.substring(0,6) == "CFAP 3") && (paper03.substring(0,6) == "CFAP 6" || paper03.substring(0,6) == "CFAP 3")){
+      price = 30000; 
+    } else if((paper01.substring(0,6) == "CFAP 6" || paper01.substring(0,6) == "CFAP 4") && (paper03.substring(0,6) == "CFAP 6" || paper03.substring(0,6) == "CFAP 4")){
+      price = 30000;
+    } else if((paper01.substring(0,6) == "CFAP 3" || paper01.substring(0,6) == "CFAP 4") && (paper03.substring(0,6) == "CFAP 3" || paper03.substring(0,6) == "CFAP 4")){
+      price = 21000;
+    }
+
+  } else if(paper02 && paper03){
+    if((paper02.substring(0,6) == "CFAP 1" || paper02.substring(0,6) == "CFAP 6") && (paper03.substring(0,6) == "CFAP 1" || paper03.substring(0,6) == "CFAP 6")){
+      price = 38000;
+    } else if((paper02.substring(0,6) == "CFAP 1" || paper02.substring(0,6) == "CFAP 3") && (paper03.substring(0,6) == "CFAP 1" || paper03.substring(0,6) == "CFAP 3")){
+      price = 24000;
+    } else if((paper02.substring(0,6) == "CFAP 1" || paper02.substring(0,6) == "CFAP 4") && (paper03.substring(0,6) == "CFAP 1" || paper03.substring(0,6) == "CFAP 4")){
+      price = 24000;
+    } else if((paper02.substring(0,6) == "CFAP 6" || paper02.substring(0,6) == "CFAP 3") && (paper03.substring(0,6) == "CFAP 6" || paper03.substring(0,6) == "CFAP 3")){
+      price = 30000; 
+    } else if((paper02.substring(0,6) == "CFAP 6" || paper02.substring(0,6) == "CFAP 4") && (paper03.substring(0,6) == "CFAP 6" || paper03.substring(0,6) == "CFAP 4")){
+      price = 30000;
+    } else if((paper02.substring(0,6) == "CFAP 3" || paper02.substring(0,6) == "CFAP 4") && (paper03.substring(0,6) == "CFAP 3" || paper03.substring(0,6) == "CFAP 4")){
+      price = 21000;
+    }
+  }
+}
 function priceCalc () {
+  amountBox.innerHTML = "";
   if(count === 1){
-    amountBox.innerHTML = "&nbsp;&nbsp;25,000"
+    price = 25000;
   } else if (count === 2){
-    amountBox.innerHTML = "&nbsp;&nbsp;40,000"
+    priceChartFunc();
   } else if(count === 3){
-    amountBox.innerHTML = "&nbsp;&nbsp;50,000"
+    price = 50000;
   } else if(count === 0) {
-    amountBox.innerHTML = "&nbsp;&nbsp;00"
+    price = 0;
   }
+  amountBox.innerHTML = price;
 }
-
 function discPriceCalc () {
+  amountBox.innerHTML = "";
   if(count === 1){
-    amountBox.innerHTML = "&nbsp;&nbsp;20,000"
+    price = (price/100)*80;
   } else if (count === 2){
-    amountBox.innerHTML = "&nbsp;&nbsp;32,000"
+    price = (price/100)*80;
   } else if(count === 3){
-    amountBox.innerHTML = "&nbsp;&nbsp;40,000"
+    price = (price/100)*80;
   }
+  amountBox.innerHTML = price;
 }
 
 
@@ -321,25 +382,23 @@ cityInput.addEventListener("keyup", (e) => {
 })
 
 
-cities.addEventListener("change", () => {
-  areas.innerHTML = "";
-  console.log(cities.value);
-  if (cities.value.toLowerCase() === "karachi") {
-    for (let i = 0; i < karachiAreas.length; i++) {
-      areas.innerHTML += `<option value=${areas[i]}>`;
-    }
+// cities.addEventListener("change", () => {
+//   areas.innerHTML = "";
+//   console.log(cities.value);
+//   if (cities.value.toLowerCase() === "karachi") {
+//     for (let i = 0; i < karachiAreas.length; i++) {
+//       areas.innerHTML += `<option value=${areas[i]}>`;
+//     }
 
-  }
-});
+//   }
+// });
 
 const scriptURL =
-  "https://script.google.com/macros/s/AKfycbxngfvVQfWAr-XpcDx6oMnw9LhzlX-EzsElea20jYqpFhLaO16juRhMrSCzQts0fMGEtA/exec";
+  "https://script.google.com/macros/s/AKfycbymzWMcM4NTjlThjpKwxfo-_nh5Pp_kILqCHXO4BlwRrzSMOim2nj6lo0d5QajrPljd/exec";
 let form = document.forms["registration-form"];
-
-
-
 let submitBtn = document.querySelector("#submit-btn");
 let loader = document.querySelectorAll(".loader")[0];
+let warningSpan = document.getElementById("warning-span");
 
 function resetForm() {
   form.reset();
@@ -350,6 +409,24 @@ function resetForm() {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  warningSpan.innerHTML = "";
+  let fName =  document.querySelector("#name").value;
+  let  fGuardian = document.getElementById("guardian-name").value;
+  let  fPhone = document.getElementById("Phone").value;
+  let  fGuardianPhone = document.getElementById("guardian-phone").value;
+  let  fCnic = document.getElementById("cnic").value;
+  let  fEmail = document.getElementById("e-mail").value;
+  let  fState = document.getElementById("province").value;
+  let  fCity = document.getElementById("city-input").value;
+  let  fArea = document.getElementById("Areas").value;
+  let  fPrev = document.getElementById("Previous-college").value;
+  let  fCoupon = document.getElementById("coupon").value;
+  let  fQualification = document.getElementById("qualification").value;
+  let  fCount = count;
+  let  fAmount = price;
+  let  fAttempt01 = document.getElementById("Attempt").value || document.getElementById("Attempt02").value
+  let  fAttempt02 = document.getElementById("Attempt02").value || document.getElementById("Attempt03").value
+  let  fAttempt03 = document.getElementById("Attempt03").value || document.getElementById("Attempt").value
   
   let files = inp.files;
   if (files.length > 0) {
@@ -361,18 +438,29 @@ form.addEventListener("submit", (e) => {
 
   var storageRef = firebase.storage().ref();
   var file = document.querySelector("#ICAP").files[0];
+  if(!file){
+    warningSpan.innerHTML = "please fill out all fields";
+  }
   var name = new Date() + "-" + file.name;
   const metaData = {
     contentType: file.type,
   };
 
-  form.Paper_Count.value = count;
+  form["Paper Count"].value = count;
+  if(paper01 && paper02 && paper03){
+    if((paper01 === paper02) || (paper01 === paper03) || (paper02 === paper03)){
+    alert("You Have Selected Same Courses")
+    return false;
+  }
+  
+  }
+
 
   if(count === 1){
-    loader.classList.remove("dp-none");
+    // loader.classList.remove("dp-none");
     submitBtn.disabled = true;
     form["Paper(s)"].value = paper01 || paper02 || paper03;
-    form.Attempt.value = form.Attempt.value || form.Attempt02.value || form.Attempt03.value;
+    form["Attempt"].value = fAttempt01 || fAttempt02 || fAttempt03;
     storageRef
       .child(name)
       .put(file)
@@ -382,17 +470,24 @@ form.addEventListener("submit", (e) => {
           .getDownloadURL()
           .then((url) => {
             console.log("1st");
-            form.ICAP_Card.value = url;
+            form["ICAP Card"].value = url;
+            console.log(url);
+            console.log(form.Name.value);
+            console.log(form.Phone.value);
+            console.log(form.Attempt.value);
+            console.log(form["ICAP Card"].value);
+            console.log(form.Qualification.value);
           })
           .then(() => {
             console.log("2nd");
             fetch(scriptURL, { method: "POST", body: new FormData(form) })
               .then((response) => {
-                  loader.classList.add("dp-none");
-                    submitBtn.disabled = false;
-                    alert(
-                      "Thanks for Contacting us..! We Will Contact You Soon..."
+                  // loader.classList.add("dp-none");
+                  console.log(form["ICAP Card"].value);
+                  alert(
+                    "Thanks for Contacting us..! We Will Contact You Soon..."
                     )
+                    submitBtn.disabled = false;
                     resetForm();
                   })
                   .catch((error) => {
@@ -402,29 +497,45 @@ form.addEventListener("submit", (e) => {
                     resetForm();
                     
                   })
-                  .catch((error) => {
-                    console.error("Error!", error.message)
-                    loader.classList.add("dp-none");
-                    submitBtn.disabled = false;});
-                    resetForm();
+            .catch((error) => {
+              console.error("Error!", error.message)
+              loader.classList.add("dp-none");
+              submitBtn.disabled = false;});
+              resetForm();
                     
       });
     
   } else if (count === 2){
-    loader.classList.remove("dp-none");
-    submitBtn.disabled = true;
+    // loader.classList.remove("dp-none");
     storageRef
+    .child(name)
+    .put(file)
+    .then((snapshot) => {
+      storageRef
       .child(name)
-      .put(file)
-      .then((snapshot) => {
-        storageRef
-          .child(name)
-          .getDownloadURL()
-          .then((url) => {
-            console.log("1st");
-            form.Attempt.value = form.Attempt.value || form.Attempt02.value;
-            form["Paper(s)"].value = paper01 || paper02;
-            form.ICAP_Card.value = url;
+      .getDownloadURL()
+      .then((url) => {
+        console.log("1st");
+        submitBtn.disabled = true;
+        form.Attempt.value = form.Attempt.value || form.Attempt02.value;
+        form["Paper(s)"].value = paper01 || paper02;
+        form["ICAP Card"].value = url;
+        form["Paper Count"].value = fCount;
+        form["Name"].value = fName;
+        form["Father/Guardian Name"].value = fGuardian;
+        form["Phone"].value = fPhone;
+        form["Father/Guardian Phone"].value = fGuardianPhone;
+        form["CNIC"].value = fCnic;
+        form["Email"].value = fEmail;
+        form["State/Province"].value = fState;
+        form["City"].value = fCity;
+        form["Area/Locality"].value = fArea;
+        form["Previous college"].value = fPrev;
+        form["Coupon"].value = fCoupon;
+        form["Qualification"].value = fQualification;
+        form["Amount"].value = fAmount;
+        form["Attempt"].value = fAttempt01;
+        
           })
           .then(() => {
             console.log("2nd");
@@ -434,35 +545,35 @@ form.addEventListener("submit", (e) => {
                 //SECOND //
                 form.Attempt.value = form.Attempt03.value || form.Attempt02.value;
                 form["Paper(s)"].value = paper03 || paper02;
-                console.log(form.Attempt.value);
-                resetForm();
+                form["Attempt"].value = fAttempt01;
+                // resetForm();
                 fetch(scriptURL, {
                     method: "POST",
                     body: new FormData(form),
                   }).then((response) => {
-                    loader.classList.add("dp-none");
+                    // loader.classList.add("dp-none");
                     submitBtn.disabled = false;
                     alert(
                       "Thanks for Contacting us..! We Will Contact You Soon..."
                     )
-                    resetForm();
+                    // resetForm();
                   });
               })
               .catch((error) => {
                 console.error("Error!", error.message)
                 loader.classList.add("dp-none");
                 submitBtn.disabled = false;});
-                resetForm();
+                // resetForm();
           })
           .catch((error) => {
             console.error("Error!", error.message)
-            loader.classList.add("dp-none");
+            // loader.classList.add("dp-none");
             submitBtn.disabled = false;});
             resetForm();
       });
   } else if(count === 3){
-    loader.classList.remove("dp-none");
-  submitBtn.disabled = true;
+    // loader.classList.remove("dp-none");
+  // submitBtn.disabled = true;
   storageRef
     .child(name)
     .put(file)
@@ -472,8 +583,9 @@ form.addEventListener("submit", (e) => {
         .getDownloadURL()
         .then((url) => {
           console.log("FIRIST");
+          form["ICAP Card"].value = url;
           form["Paper(s)"].value = paper01;
-          form.ICAP_Card.value = url;
+          form["Attempt"].value = fAttempt01;
         })
         .then(() => {
           console.log("SECOND");
@@ -481,52 +593,52 @@ form.addEventListener("submit", (e) => {
             .then((response) => {
                 console.log(form.Attempt.value);
               //SECOND //
-              form.Attempt.value = form.Attempt02.value;
               form["Paper(s)"].value = paper02;
-              console.log(form.Attempt.value);
-              resetForm();
+              form["Attempt"].value = fAttempt02;
+              // resetForm();
               fetch(scriptURL, {
                   method: "POST",
                   body: new FormData(form),
                 }).then((response) => {
                     // THIRD //
-                    form.Attempt.value = form.Attempt03.value;
-                    form["Paper(s)"].value = paper01;
-                    console.log(form.Attempt.value);
-                    resetForm();
+                    form["Paper(s)"].value = paper03;
+                    form["Attempt"].value = fAttempt03;
+                    // resetForm();
                 fetch(scriptURL, { method: "POST", body: new FormData(form) })
                   .then((response) =>{
-                    loader.classList.add("dp-none");
-                    submitBtn.disabled = false;
+                    // loader.classList.add("dp-none");
+                    // submitBtn.disabled = false;
                     alert(
                       "Thanks for Contacting us..! We Will Contact You Soon..."
                     );
-                    resetForm();
+                    // resetForm();
                   }
                   )
                   .catch((error) => {
                     console.error("Error!", error.message)
-                    loader.classList.add("dp-none");
-                    submitBtn.disabled = false;
-                    resetForm();});
+                    // loader.classList.add("dp-none");
+                    // submitBtn.disabled = false;
+                    // resetForm();
+                  });
               });
             })
             .catch((error) => {
               console.error("Error!", error.message)
-              loader.classList.add("dp-none");
-              submitBtn.disabled = false;
-              resetForm();});
+              // loader.classList.add("dp-none");
+              // submitBtn.disabled = false;
+              // resetForm();
+            });
         })
         .catch((error) => {
           console.error("Error!", error.message)
-          loader.classList.add("dp-none");
-          submitBtn.disabled = false;
-          resetForm();});
+          // loader.classList.add("dp-none");
+          // submitBtn.disabled = false;
+          // resetForm();
+        });
     });
   }
   
 });
-
 
 function addPlusBox01 (e) {
     let boxes = document.querySelectorAll(".course-select-boxes")[0];
@@ -571,13 +683,5 @@ let coursesChart = document.querySelectorAll(".course-chart");
 let coursesChart02 = document.querySelectorAll(".course-chart-02");
 let coursesChart03 = document.querySelectorAll(".course-chart-03");
 
-// for(let i=0; i<coursesChart.length; i++) {
-//     coursesChart[i].addEventListener("click", addPlusBox01)
-// }
-// for(let i=0; i<coursesChart.length; i++) {
-//     coursesChart02[i].addEventListener("click", addPlusBox02)
-// }
-// for(let i=0; i<coursesChart.length; i++) {
-//     coursesChart03[i].addEventListener("click", addPlusBox03)
-// }
+
 
